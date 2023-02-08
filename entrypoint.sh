@@ -98,7 +98,7 @@ workflowStallHandler() {
   last_workflow_url="${GITHUB_SERVER_URL}/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/runs/${last_workflow_id}"
 
 
-  echo "Syncing the Platform Changes...:"
+  echo "Syncing the Platform Changes..."
 
   conclusion=null
   status=
@@ -121,6 +121,7 @@ workflowStallHandler() {
     -H "X-GitHub-Api-Version: 2022-11-28" \
     ${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/pulls?state=open | jq -r '[.[].html_url][0]')
     then
+    echo $response
     if [[ ! -n "$response" ]]
      then 
      echo "PR LINK": $response
