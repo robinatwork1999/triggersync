@@ -122,10 +122,7 @@ workflowStallHandler() {
     ${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/pulls?state=open | jq -r '[.[].html_url][0]')
     then
   
-    if [[ -n "$response" ]]
-     then 
-     echo "No PR Found"
-    elif [[ ! -z "$response" ]] 
+    if [[ ! -z "$response" ]] && [[ $response != "null" ]]
       then
         echo $response
     fi 
