@@ -86,7 +86,7 @@ triggerWorkflowHandler() {
   NEW_RUNS=$OLD_RUNS
   while [ "$NEW_RUNS" = "$OLD_RUNS" ]
   do
-    NEW_RUNS=$(get_workflow_runs "$SINCE")
+    NEW_RUNS=$(getWorkflowData "$SINCE")
   done
 
   # Return new run ids
