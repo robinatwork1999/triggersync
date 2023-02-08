@@ -125,6 +125,8 @@ workflowStallHandler() {
     if [[ ! -z "$response" ]] && [[ $response != "null" ]]
       then
         echo $response
+      else
+        echo "NO PR Found"  
     fi 
     else
     echo "PR Link Not Fetched Due To Some Error"
