@@ -1,4 +1,4 @@
-name: 'Workflow and Wait'
+name: 'Workflow Wait'
 description: 'This action triggers a workflow in another repository and waits for the result.'
 author: 'Rimz'
 branding:
