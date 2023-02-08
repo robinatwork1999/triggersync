@@ -64,7 +64,6 @@ api() {
   fi
 }
 
-
 getWorkflowData() {
   since=${1:?}
   query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
