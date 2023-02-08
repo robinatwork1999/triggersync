@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  self-test:
+    name: Run self-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: robinatwork1999/trigeerwf@release-v.0.1
+        with:
+            org: robinatwork1999
+            repository: product-commerce
+            repo_token: ${{ secrets.TOKEN }}
+            workflow_file_name: cc.yml
+            client_payload: '{"emailid": "11111"}' 
