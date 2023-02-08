@@ -134,7 +134,6 @@ workflowStallHandler() {
   else
     echo "Platform syncing failed due to some error"
       exit 1
-    fi
   fi
 }
 
