@@ -46,7 +46,7 @@ api() {
   path=$1; shift
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/$path" \
-      -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" \
+      -H "Authorization: Bearer ${INPUT_REPO_TOKEN}" \
       -H 'Accept: application/vnd.github.v3+json' \
       -H 'Content-Type: application/json' \
       "$@")
@@ -117,7 +117,7 @@ workflowStallHandler() {
 
     if response=$(curl -sSL \
     -H "Accept: application/vnd.github+json" \
-    -H "Authorization: Bearer ${INPUT_COMMENT_GITHUB_TOKEN}"\
+    -H "Authorization: Bearer ${INPUT_REPO_TOKEN}"\
     -H "X-GitHub-Api-Version: 2022-11-28" \
     ${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/pulls?state=open | jq -r '[.[].html_url][0]')
     then
