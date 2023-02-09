@@ -74,7 +74,7 @@ getWorkflowData() {
 
 triggerWorkflowHandler() {
   START_TIME=$(date +%s)
-  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 120))")
+  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 10))")
 
   OLD_RUNS=$(getWorkflowData "$SINCE")
   echo $OLD_RUNS
