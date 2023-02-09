@@ -93,7 +93,7 @@ triggerWorkflowHandler() {
 workflowStallHandler() {
   echo "Syncing the Platform Changes..."
   echo ${1}
-  link="runs/$1" sed -e 's/ //g'
+  link="runs/$1" | sed -e 's/ //g'
   conclusion=null
   status=
 
