@@ -87,7 +87,7 @@ triggerWorkflowHandler() {
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
   # Return new run ids
-  echo "$NEW_RUNS"
+  <(echo "$NEW_RUNS")
 }
 
 workflowStallHandler() {
