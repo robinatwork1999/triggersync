@@ -93,13 +93,13 @@ triggerWorkflowHandler() {
 workflowStallHandler() {
   echo "Syncing the Platform Changes..."
   echo ${1}
-  echo "runs/${1}"
+  link="runs/$1" sed -e 's/ //g'
   conclusion=null
   status=
 
   while [[ "${conclusion}" == "null" && "${status}" != "completed" ]]
   do 
-    workflow=$(api "runs/${1:?}")
+    workflow=$(api "$link")
     conclusion=$(echo "${workflow}" | jq -r '.conclusion')
     status=$(echo "${workflow}" | jq -r '.status')
   done
