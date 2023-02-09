@@ -87,7 +87,7 @@ triggerWorkflowHandler() {
 
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
-  id_data=NEW_RUNS
+  id_data=$NEW_RUNS
 }
 
 workflowStallHandler() {
