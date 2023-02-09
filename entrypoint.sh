@@ -45,6 +45,7 @@ validateArgs() {
 }
 
 api() {
+  echo $path
   path=$1; shift
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/$path" \
@@ -68,7 +69,7 @@ api() {
 
 getWorkflowData() {
   since=${1:?}
-  query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
+  query="event=workflow_dispatch&created=>=$since${GITHUB_ACTOR+&actor=}${GITHUB_ACTOR}&per_page=100"
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
   jq -r '[.workflow_runs[].id][0]'
 }
