@@ -11,9 +11,7 @@ Github Action for triggering the platform sync workflow in FE Platform repositor
 | `client_payload`         | True       | N/A         | Payload containing brandname to be passed in JSON format. |
 
 
-## Example
-
-### Simple
+## Example Usage
 
 ```yaml
 - uses: AEMCS/platform-sync@v.0.1
