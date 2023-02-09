@@ -69,8 +69,7 @@ api() {
 
 getWorkflowData() {
   since=${1:?}
-  echo "event=workflow_dispatch&actor=${GITHUB_ACTOR}&per_page=100&created=>=${since}"
-  query="event=workflow_dispatch&actor=${GITHUB_ACTOR}&per_page=100&created=>=${since}"
+  query="event=workflow_dispatch&created=>=$since${GITHUB_ACTOR_ID+&actor=}${GITHUB_ACTOR_ID}&per_page=100"
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
   jq -r '[.workflow_runs[].id][0]'
 }
