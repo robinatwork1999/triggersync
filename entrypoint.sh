@@ -137,7 +137,13 @@ entrypoint() {
   validateArgs
 
     triggerWorkflowHandler
-    workflowStallHandler
+     if [[ ! -z "$id_data" ]] && [[ $id_data != "null" ]]
+      then
+      workflowStallHandler
+      else
+      echo "Platform syncing failed due to some error"
+      exit 1
+    fi 
 }
 
 entrypoint
