@@ -43,8 +43,8 @@ validateArgs() {
 }
 
 api() {
+  echo $1
   path=$1; shift
-  echo $path
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/$path" \
       -H "Authorization: Bearer ${INPUT_REPO_TOKEN}" \
@@ -75,14 +75,10 @@ getWorkflowData() {
 
 triggerWorkflowHandler() {
   echo >&2 "Triggering Workflow For Syncing Platform"
-
-  sleep 5
   
   # Trigger the workflow
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
     --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
-
-  sleep 10
   
   START_TIME=$(date +%s)
   SINCE=$(date -u -Iseconds -d "@$((START_TIME - 15))")  
