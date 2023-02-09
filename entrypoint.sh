@@ -77,6 +77,7 @@ triggerWorkflowHandler() {
   SINCE=$(date -u -Iseconds -d "@$((START_TIME - 120))")
 
   OLD_RUNS=$(getWorkflowData "$SINCE")
+  echo $OLD_RUNS
 
   echo >&2 "Triggering Workflow For Syncing Platform"
 
@@ -87,6 +88,7 @@ triggerWorkflowHandler() {
   while [ "$NEW_RUNS" = "$OLD_RUNS" ]
   do
     NEW_RUNS=$(getWorkflowData "$SINCE")
+    echo $NEW_RUNS
   done
 
   # Return new run ids
@@ -141,7 +143,7 @@ entrypoint() {
   validateArgs
 
     jobIds=$(triggerWorkflowHandler)
-
+    echo $jobIds
     for jobId in $jobIds
     do
       workflowStallHandler "$jobId"
