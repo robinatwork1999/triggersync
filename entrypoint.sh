@@ -79,6 +79,8 @@ triggerWorkflowHandler() {
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
     --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
   
+  sleep 10
+  
   START_TIME=$(date +%s)
   SINCE=$(date -u -Iseconds -d "@$((START_TIME - 15))")  
 
