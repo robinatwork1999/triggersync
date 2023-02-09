@@ -43,7 +43,6 @@ validateArgs() {
 }
 
 api() {
-  echo $1
   path=$1; shift
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/$path" \
@@ -90,8 +89,6 @@ triggerWorkflowHandler() {
 }
 
 workflowStallHandler() {
-  echo $1
-  
   echo "Syncing the Platform Changes..."
 
   conclusion=null
