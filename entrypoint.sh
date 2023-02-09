@@ -5,6 +5,7 @@ GITHUB_API_URL="${API_URL:-https://api.github.com}"
 GITHUB_SERVER_URL="${SERVER_URL:-https://github.com}"
 
 validateArgs() {
+  printenv
   # Setup branch
   ref="main"
   id_data=null
