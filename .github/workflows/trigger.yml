@@ -8,7 +8,7 @@ jobs:
     name: Run self-test
     runs-on: ubuntu-latest
     steps:
-      - uses: robinatwork1999/triggersync@master-v44
+      - uses: robinatwork1999/triggersync@master-v45
         with:
             org: robinatwork1999
             repository: product-commerce
