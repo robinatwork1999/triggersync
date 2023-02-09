@@ -93,7 +93,7 @@ triggerWorkflowHandler() {
 }
 
 workflowStallHandler() {
-  echo($1)
+  echo $1
   last_workflow_id=$1
 
   echo "id: ${last_workflow_id}"
