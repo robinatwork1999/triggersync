@@ -94,8 +94,6 @@ triggerWorkflowHandler() {
 
 workflowStallHandler() {
   echo $1
-
-  echo "id: $1"
   
   echo "Syncing the Platform Changes..."
 
