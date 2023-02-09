@@ -67,32 +67,29 @@ api() {
 getWorkflowData() {
   since=${1:?}
   query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
-  api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
-  jq -r '.workflow_runs[].id' |
-  sort
+  api "workflows/${workflowfile}/runs?${query}" |
+  jq -r '[.workflow_runs[].id][0]'
 }
 
+
 triggerWorkflowHandler() {
-  START_TIME=$(date +%s)
-  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 10))")
-
-  OLD_RUNS=$(getWorkflowData "$SINCE")
-  echo $OLD_RUNS
-
   echo >&2 "Triggering Workflow For Syncing Platform"
 
-  api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
+  sleep 10
+  
+  # Trigger the workflow
+  api "workflows/${workflowfile}/dispatches" \
     --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
 
-  NEW_RUNS=$OLD_RUNS
-  while [ "$NEW_RUNS" = "$OLD_RUNS" ]
-  do
-    NEW_RUNS=$(getWorkflowData "$SINCE")
-    echo $NEW_RUNS
-  done
+  sleep 10
+  
+  START_TIME=$(date +%s)
+  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 10))")  
+
+  NEW_RUNS=$(getWorkflowData "$SINCE")
 
   # Return new run ids
-  join -v2 <(echo "$OLD_RUNS") <(echo "$NEW_RUNS")
+  join -v2 <(echo "$NEW_RUNS")
 }
 
 workflowStallHandler() {
@@ -143,11 +140,9 @@ entrypoint() {
   validateArgs
 
     jobIds=$(triggerWorkflowHandler)
+    
     echo $jobIds
-    for jobId in $jobIds
-    do
-      workflowStallHandler "$jobId"
-    done
+    workflowStallHandler "$jobId"
 }
 
 entrypoint
