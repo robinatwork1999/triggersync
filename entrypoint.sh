@@ -69,21 +69,20 @@ getWorkflowData() {
   since=${1:?}
   query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
-  jq -r '[.workflow_runs[].id][0]' |
-  sort
+  jq -r '[.workflow_runs[].id][0]'
 }
 
 
 triggerWorkflowHandler() {
   echo >&2 "Triggering Workflow For Syncing Platform"
   
-  sleep 10
+  sleep 5
   
   # Trigger the workflow
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
     --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
   
-  sleep 10
+  sleep 5
   
   START_TIME=$(date +%s)
   SINCE=$(date -u -Iseconds -d "@$((START_TIME - 15))")  
