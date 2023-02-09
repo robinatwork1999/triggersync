@@ -139,9 +139,9 @@ workflowStallHandler() {
 entrypoint() {
   validateArgs
 
-    jobIds=$(triggerWorkflowHandler)
+    jobId=$(triggerWorkflowHandler)
     
-    echo $jobIds
+    echo $jobId
     workflowStallHandler "$jobId"
 }
 
