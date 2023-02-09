@@ -7,6 +7,7 @@ GITHUB_SERVER_URL="${SERVER_URL:-https://github.com}"
 validateArgs() {
   # Setup branch
   ref="main"
+  id_data=null
 
   # Necessary I/P Checks
   if [ -z "${INPUT_ORG}" ]
@@ -86,19 +87,18 @@ triggerWorkflowHandler() {
 
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
-  # Return new run ids
-  echo "$NEW_RUNS"
+  id_data=NEW_RUNS
 }
 
 workflowStallHandler() {
   echo "Syncing the Platform Changes..."
-  echo ${1}
+  echo ${id_data}
   conclusion=null
   status=
 
   while [[ "${conclusion}" == "null" && "${status}" != "completed" ]]
   do 
-    workflow=$(api "runs/$1" | sed -e 's/ //g')
+    workflow=$(api "runs/${id_data}")
     conclusion=$(echo "${workflow}" | jq -r '.conclusion')
     status=$(echo "${workflow}" | jq -r '.status')
   done
@@ -133,9 +133,8 @@ workflowStallHandler() {
 entrypoint() {
   validateArgs
 
-    jobId=$(triggerWorkflowHandler)
-    echo "$jobId"
-    workflowStallHandler "$jobId"
+    triggerWorkflowHandler
+    workflowStallHandler
 }
 
 entrypoint
