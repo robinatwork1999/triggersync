@@ -84,7 +84,7 @@ triggerWorkflowHandler() {
   sleep 10
   
   START_TIME=$(date +%s)
-  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 15))")  
+  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 30))")  
 
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
