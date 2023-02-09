@@ -14,9 +14,9 @@ inputs:
   workflow_file_name:
     description: "The reference point. For example, you could use main.yml."
     required: true
-  client_payload:
+  email:
     description: 'Payload to pass to the workflow, must be a JSON string'
-    required: false
+    required: true
   repo_token:
     description: "The Github access token with access to the repository. It is recommended you put this token under secrets."
     required: true
