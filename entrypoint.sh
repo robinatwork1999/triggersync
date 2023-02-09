@@ -94,9 +94,8 @@ triggerWorkflowHandler() {
 
 workflowStallHandler() {
   echo $1
-  last_workflow_id=$1; shift
 
-  echo "id: ${last_workflow_id}"
+  echo "id: $1"
   
   echo "Syncing the Platform Changes..."
 
@@ -105,7 +104,7 @@ workflowStallHandler() {
 
   while [[ "${conclusion}" == "null" && "${status}" != "completed" ]]
   do 
-    workflow=$(api "runs/$last_workflow_id")
+    workflow=$(api "runs/$1")
     conclusion=$(echo "${workflow}" | jq -r '.conclusion')
     status=$(echo "${workflow}" | jq -r '.status')
   done
