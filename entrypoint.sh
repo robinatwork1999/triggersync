@@ -34,13 +34,10 @@ validateArgs() {
     exit 1
   fi
 
-  if [ -z "${INPUT_CLIENT_PAYLOAD}" ]
+  if [ -z "${INPUT_EMAIL}" ]
   then
     echo "Error: Brandname is required"
     exit 1
-  else 
-    clientPayload=$(echo "${INPUT_CLIENT_PAYLOAD}" | jq -c)  
-  fi
 }
 
 api() {
@@ -78,7 +75,7 @@ triggerWorkflowHandler() {
   
   # Trigger the workflow
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
-    --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
+    --data "{\"ref\":\"${ref}\",\"inputs\":{emailid: ${INPUT_EMAIL}}}"
   
   sleep 10
   
