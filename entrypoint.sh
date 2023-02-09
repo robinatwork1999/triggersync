@@ -67,7 +67,7 @@ api() {
 getWorkflowData() {
   since=${1:?}
   query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
-  api "workflows/${workflowfile}/runs?${query}" |
+  api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
   jq -r '[.workflow_runs[].id][0]'
 }
 
@@ -89,7 +89,7 @@ triggerWorkflowHandler() {
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
   # Return new run ids
-  join -v2 <(echo "$NEW_RUNS")
+  echo "$NEW_RUNS"
 }
 
 workflowStallHandler() {
