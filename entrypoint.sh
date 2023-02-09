@@ -38,6 +38,7 @@ validateArgs() {
   then
     echo "Error: Brandname is required"
     exit 1
+  fi  
 }
 
 api() {
