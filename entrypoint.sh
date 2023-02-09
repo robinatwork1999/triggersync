@@ -75,16 +75,16 @@ getWorkflowData() {
 triggerWorkflowHandler() {
   echo >&2 "Triggering Workflow For Syncing Platform"
 
-  sleep 10
+  sleep 5
   
   # Trigger the workflow
-  api "workflows/${workflowfile}/dispatches" \
+  api "workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
     --data "{\"ref\":\"${ref}\",\"inputs\":${clientPayload}}"
 
   sleep 10
   
   START_TIME=$(date +%s)
-  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 10))")  
+  SINCE=$(date -u -Iseconds -d "@$((START_TIME - 15))")  
 
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
