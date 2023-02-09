@@ -39,7 +39,7 @@ validateArgs() {
     echo "Error: Brandname is required"
     exit 1
   else 
-    clientPayload=$(echo '{emailid: ${INPUT_EMAIL}}' | jq -c) 
+    clientPayload=$(echo '{"emailid": "'"${INPUT_EMAIL}"'"}' | jq -c) 
   fi  
 }
 
