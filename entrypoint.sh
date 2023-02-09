@@ -96,7 +96,8 @@ workflowStallHandler() {
   last_workflow_id=${1}
   last_workflow_url="${GITHUB_SERVER_URL}/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/runs/${last_workflow_id}"
 
-
+  echo "${last_workflow_id}"
+  
   echo "Syncing the Platform Changes..."
 
   conclusion=null
