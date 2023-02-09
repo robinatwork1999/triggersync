@@ -92,8 +92,8 @@ triggerWorkflowHandler() {
 
 workflowStallHandler() {
   echo "Syncing the Platform Changes..."
-  echo ${1:?}
-  echo "runs/${1:?}"
+  echo ${1}
+  echo "runs/${1}"
   conclusion=null
   status=
 
