@@ -69,7 +69,8 @@ getWorkflowData() {
   since=${1:?}
   query="event=workflow_dispatch&created=>=$since${INPUT_GITHUB_USER+&actor=}${INPUT_GITHUB_USER}&per_page=100"
   api "workflows/${INPUT_WORKFLOW_FILE_NAME}/runs?${query}" |
-  jq -r '[.workflow_runs[].id][0]'
+  jq -r '[.workflow_runs[].id][0]' |
+  sort
 }
 
 
