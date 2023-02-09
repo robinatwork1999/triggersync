@@ -44,6 +44,7 @@ validateArgs() {
 
 api() {
   path=$1; shift
+  echo $path
   if response=$(curl --fail-with-body -sSL \
       "${GITHUB_API_URL}/repos/${INPUT_ORG}/${INPUT_REPOSITORY}/actions/$path" \
       -H "Authorization: Bearer ${INPUT_REPO_TOKEN}" \
