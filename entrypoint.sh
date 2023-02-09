@@ -87,12 +87,13 @@ triggerWorkflowHandler() {
   NEW_RUNS=$(getWorkflowData "$SINCE")
 
   # Return new run ids
-  <(echo "$NEW_RUNS")
+  echo "$NEW_RUNS"
 }
 
 workflowStallHandler() {
   echo "Syncing the Platform Changes..."
   echo ${1:?}
+  echo "runs/${1:?}"
   conclusion=null
   status=
 
